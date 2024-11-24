@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Schedule</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <%= render 'devise/shared/navbar' %>
+  <div class="container mt-4">
+    <h1>New Schedule</h1>
+
+    <%= render 'form', schedule: @schedule %>
+  </div>
+</body>
+</html>

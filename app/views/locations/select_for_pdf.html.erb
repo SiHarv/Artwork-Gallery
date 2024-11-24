@@ -1,0 +1,81 @@
+<h1 class="text-center mb-4" style="padding-left: 100px">Select Locations for PDF Report</h1>
+
+<%= form_with url: download_pdf_locations_path(format: :pdf), method: :get, local: true, html: { class: 'mb-4' } do %>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10" style="padding-left: 300px;">
+        <table class="table table-bordered table-striped">
+          <thead class="thead-light">
+            <tr>
+              <th>Select</th>
+              <th>Name of Place</th>
+              <th>Address</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Schedule</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @locations.each do |location| %>
+              <tr>
+                <td><%= check_box_tag 'location_ids[]', location.id %></td>
+                <td><%= location.name_of_place %></td>
+                <td><%= location.address %></td>
+                <td><%= location.email %></td>
+                <td><%= location.phone_number %></td>
+                <td>
+                  <% if location.schedules.any? %>
+                    <ul class="list-unstyled">
+                      <% location.schedules.each do |schedule| %>
+                        <li>
+                          <strong>Date:</strong> <%= schedule.date.strftime("%B %d, %Y") %><br>
+                        </li>
+                      <% end %>
+                    </ul>
+                  <% else %>
+                    No schedules
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+          <%= submit_tag 'Generate PDF', class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= render 'devise/shared/navbar' %>
+
+
+<style>
+  .select-arts-title {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .generate-button {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .generate-button:hover {
+    background-color: #0056b3;
+  }
+
+</style>

@@ -1,0 +1,85 @@
+<%= render 'devise/shared/navbar' %>
+<div class="show-container">
+  <h1 class="title">Details</h1>
+    <!--  navbar-->
+
+  <div class="show-body">
+    <div class="content-box">
+      <!-- Upper -->
+      <div class="show-art-details-upper">
+        <div class="show-art-details">
+          <div class="show-image-render">
+            <%= render @art %>
+            <p class="_art-price">
+              <strong>Price:</strong>
+              <%= number_to_currency(@art.price) if @art.price %>
+            </p>
+          </div>
+        </div>
+        <!-- Description -->
+        <div class="show-art-description"> <!-- show description -->
+          <p class="art-details">
+            <strong>Description: </strong>
+            <%= @art.body %>
+          </p>
+        </div>
+      </div>
+
+      <!-- Lower -->
+      <div class="show-art-details-lower">
+        <div class="show-art-pictures">
+          <div class="show-image-previews" data-previews-target="preview">
+            <% if @art.images.attached? %>
+              <% @art.images.each do |image| %>
+                <%= image_tag image, class: "show-image-preview" %>
+              <% end %>
+            <% else %>
+              <%= image_tag "no_image.jpg", class: "no-image-preview" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="show-art-video">
+          <div class="show-video-preview">
+            <% if @art.video.attached? %>
+              <%= video_tag url_for(@art.video), controls: true, class: 'video-js vjs-default-skin show-fixed-size-video' %>
+              <% else %>
+                <div class="show-no-video">
+                  <p>Attach Video File to Preview</p>
+                </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <!-- Buttons -->
+      <div class="show-action-buttons">
+        <%= link_to "Edit", edit_art_path(@art), class: "btn btn-primary" %>
+        <!--<%= link_to "Back to arts", arts_path, class: "btn btn-secondary" %> -->
+        <%= button_to "Delete", @art, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to delete this art? This action cannot be undone." } %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .show-no-video{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 580px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: oswald;
+    font-weight: 420;
+    background-color: #F7F7F7;
+  }
+
+  .show-action-buttons{
+    display: flex;
+    justify-content: right;
+  }
+</style>
+
+
+

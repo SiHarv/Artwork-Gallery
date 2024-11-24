@@ -1,0 +1,87 @@
+<div class="public-arts-header">
+  <h1>Artworks</h1>
+  <h5>Click any artwork to see more details</h5>
+</div>
+<div class="public-arts-container">
+  <div class="public-arts-cards-container">
+    <% @arts.each do |art| %>
+      <%= link_to public_art_path(@user.id, art.id), class: "public-card-link" do %>
+        <div class="public-card">
+          <div class="public-fixed-height card-list">
+            <%= render partial: 'art', locals: { art: art } %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  .public-arts-container {
+    display: flex;
+    justify-content: center;
+    padding: 18px; /* Optional: Add padding around the container */
+  }
+
+  .public-arts-header {
+    text-align: center;
+    margin-bottom: 30px; /* Space between header and cards */
+    padding: 20px; /* Padding around header */
+    background-color: #f9f9f9; /* Light background color for contrast */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for subtle depth */
+  }
+
+  .public-arts-header h1 {
+    font-size: 2.5rem; /* Larger font size for the header */
+    color: #333; /* Darker color for better readability */
+    margin: 0; /* Remove default margin */
+    padding: 3px; /* Padding inside the header */
+    font-weight: 600; /* Slightly bolder text */
+  }
+
+  .public-arts-header p {
+    font-size: 1.2rem; /* Slightly larger font size for the paragraph */
+    color: #555; /* Slightly lighter color for contrast */
+    margin: 8px 0 0; /* Top margin for spacing below the header */
+    line-height: 1.6; /* Line height for better readability */
+  }
+
+  .public-arts-cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Create 4 columns */
+    gap: 18px; /* Add a gap of 18px between cards */
+    width: 100%;
+    max-width: 1200px; /* Optional: Adjust the maximum width as needed */
+  }
+
+  .public-card {
+    position: relative;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    transition: transform 0.3s ease; /* Adding a transition for smooth animation */
+  }
+
+  .public-card:hover {
+    transform: scale(1.03); /* Increase size on hover */
+  }
+
+  .public-fixed-height {
+    height: 350px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .public-card-link {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Ensures text color is inherited from parent */
+    display: block; /* Makes the link block-level to fill the container */
+  }
+
+  .public-card-link:hover {
+    text-decoration: none;
+  }
+</style>

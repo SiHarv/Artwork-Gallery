@@ -1,0 +1,75 @@
+
+      <nav>
+        <div class="nav-logo-container">
+          <%= image_tag "gallery_logo.png", class: "nav-logo" %>
+        </div>
+        <ul class="nav-list">
+          <li>
+            <%= link_to arts_path, class: "#{current_page?(arts_path) ? 'active' : ''}" do %>
+              <i class="fas fa-paint-brush"></i> <!-- Icon for Artworks -->
+              Artworks
+            <% end %>
+          </li>
+          <li>
+            <%= link_to locations_path, class: "#{current_page?(locations_path) ? 'active' : ''}" do %>
+              <i class="fas fa-map-marker-alt"></i> <!-- Icon for Location -->
+              Locations
+            <% end %>
+          </li>
+          <li>
+            <%= link_to schedules_path, class: "#{current_page?(schedules_path) ? 'active' : ''}" do %>
+              <i class="fas fa-calendar-alt"></i> <!-- Icon for Schedule -->
+              Schedules
+            <% end %>
+          </li>
+          <!-- <li><%= link_to 'Reports', select_for_pdf_arts_path %></li> -->
+          <li class="nav-list-item dropdown"><a id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;
+           text-decoration: none; color: white;"><i class="fas fa-share-alt"></i> Share</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li>
+                <a class="dropdown-item" href="https://www.facebook.com/sharer/sharer.php?u=<%= request.original_url %>" target="_blank">
+                  <i class="fab fa-facebook-f"></i> Facebook
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="https://twitter.com/intent/tweet?url=<%= request.original_url %>&text=Check%20this%20out!" target="_blank">
+                  <i class="fab fa-twitter"></i> Twitter
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <% if current_user %>
+              <%= link_to public_arts_path(current_user.id), class: '' do %>
+                <i class="fas fa-images"></i> View Public Arts
+              <% end %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to '#', class: 'nav-link' do %>
+              <i class="fas fa-cog"></i> <!-- Font Awesome icon for Settings -->
+              Settings
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to log out?' }, class: 'nav-link' do %>
+              <i class="fas fa-sign-out-alt"></i> <!-- Font Awesome icon for Log Out -->
+              Log Out
+            <% end %>
+
+          </li>
+        </ul>
+      </nav>
+    <div class="content">
+
+<style>
+  .nav-logo {
+    width: 370px;
+    height: 370px;
+    margin-top: -140px;
+    margin-bottom: -140px;
+  }
+</style>
+
+
+

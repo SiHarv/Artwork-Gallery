@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Location Details</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+
+  <div class="location-container mt-4">
+    <div class="location-details">
+      <h1>Location Details</h1>
+
+      <div class="location-info">
+        <p><strong>Name of Place:</strong> <%= @location.name_of_place %></p>
+        <p><strong>Address:</strong> <%= @location.address %></p>
+        <p><strong>Email:</strong> <%= @location.email %></p>
+        <p><strong>Phone Number:</strong> <%= @location.phone_number %></p>
+        <p><strong>Notes:</strong> <%= @location.notes %></p>
+      </div>
+
+      <h2>Schedules at this Location:</h2>
+      <% if @schedules.any? %>
+        <div class="schedules-list">
+          <ul>
+            <% @schedules.each do |schedule| %>
+              <li class="schedule-item">
+                <p><strong>Date:</strong> <%= schedule.date.strftime("%B %d, %Y") %></p>
+                <p><strong>Description:</strong> <%= schedule.description %></p>
+                <p><strong>Art Title:</strong> <%= schedule.art.title %></p>
+                <% if schedule.art.images.attached? %>
+                  <%= image_tag schedule.art.images.first, class: 'schedule-image' %>
+                <% else %>
+                  <p>No image available</p>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% else %>
+        <p>No schedules available for this location.</p>
+      <% end %>
+
+      <div class="location-buttons">
+        <%= link_to 'Edit', edit_location_path(@location), class: 'btn btn-warning' %>
+        <%= link_to 'Back to List', locations_path, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  </div>
+
+  <%= render 'devise/shared/navbar' %>
+
+</body>
+<style>
+  /* General Styles */
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  .location-container {
+    display: flex;
+    justify-content: center; /* Aligns children horizontally */
+    align-items: center;     /* Aligns children vertically */
+    height: 100vh;
+    padding: 20px;
+  }
+
+  .location-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .location-info {
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  .schedules-list {
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+  }
+
+  .schedule-item {
+    border-bottom: 3px solid #ddd;
+    padding: 10px 0;
+  }
+
+  .schedule-item:last-child {
+    border-bottom: none;
+  }
+
+
+  .location-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 10px;
+  }
+
+  .schedule-image {
+    width: 100px;  /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+    object-fit: cover;
+    border-radius: 10px;
+  }
+</style>
+</html>

@@ -1,0 +1,26 @@
+<div id="arts" class="tile-row">
+  <% @arts.each do |art| %>
+    <div class="col-md-3 mb-3">
+      <%= link_to art_path(art), class: "card-link" do %>
+        <div class="card h-100" style="width: 300px;">
+          <div class="card-body fixed-height">
+            <%= render art %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  .card-link {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Ensures text color is inherited from parent */
+    display: block; /* Makes the link block-level to fill the container */
+  }
+
+  .card-link:hover,
+  .card-link:hover * {
+    text-decoration: none; /* Ensures no underline on hover */
+  }
+</style>

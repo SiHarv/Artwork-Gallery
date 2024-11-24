@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Schedules List</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script>
+    let calendar;
+
+    function switchView(view) {
+      if (view === 'calendar') {
+        document.getElementById('table-view').style.display = 'none';
+        document.getElementById('calendar-view').style.display = 'block';
+
+        // Initialize or switch to calendar view
+        setTimeout(() => {
+          if (!calendar) {
+            const calendarEl = document.getElementById('calendar');
+            calendar = new FullCalendar.Calendar(calendarEl, {
+              initialView: 'dayGridMonth',
+              headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,listMonth'
+              },
+              views: {
+                listMonth: {
+                  buttonText: 'List'
+                }
+              },
+              events: function(fetchInfo, successCallback, failureCallback) {
+                $.ajax({
+                  url: '/schedules/events',
+                  method: 'GET',
+                  success: function(data) {
+                    successCallback(data);
+                  },
+                  error: function() {
+                    failureCallback();
+                  }
+                });
+              },
+              eventContent: function(arg) {
+                const eventDate = new Date(arg.event.start);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                const isRemoved = arg.event.extendedProps.isRemoved; // Adjust this based on your data
+
+                let eventClass = '';
+
+                if (isRemoved) {
+                  eventClass = 'removed-event-title'; // Style for removed locations
+                } else if (eventDate < today) {
+                  eventClass = 'past-event-title'; // Style for past events
+                }
+
+                return {
+                  html: `<div class="fc-event-title-container ${eventClass}">
+                          <a href="/schedules/${arg.event.id}" style="color: inherit; text-decoration: none;">
+                            ${arg.event.title}
+                          </a>
+                        </div>`
+                };
+              }
+            });
+            calendar.render();
+          } else {
+            calendar.changeView('dayGridMonth');
+          }
+        }, 100); // Adjust timeout if needed
+      } else {
+        document.getElementById('table-view').style.display = 'block';
+        document.getElementById('calendar-view').style.display = 'none';
+      }
+
+      // Update URL to reflect the current view
+      const url = new URL(window.location.href);
+      url.searchParams.set('view', view);
+      window.history.replaceState({}, '', url);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the view from the URL parameters, default to 'table' if not set
+      const urlParams = new URLSearchParams(window.location.search);
+      const view = urlParams.get('view') || 'table';
+      switchView(view);
+    });
+  </script>
+</head>
+<body>
+  <%= render 'devise/shared/navbar' %>
+  <div class="container mt-4">
+    <h1>Schedules List (<%= @schedules.present? ? @schedules.count : 0 %>)</h1>
+
+    <div class="mb-3">
+      <%= link_to 'Add New Schedule', new_schedule_path, class: 'btn btn-primary' %>
+    </div>
+
+    <div class="mb-3">
+      <%= link_to select_for_pdf_schedules_path, class: "btn btn-secondary" , style: "margin-top: 5px;" do %>
+        <i class="fas fa-file-alt"></i> <!-- Icon for Report -->
+        Report
+      <% end %>
+    </div>
+
+    <!-- View Switch Buttons -->
+    <div class="mb-3" style="margin-top: 5px; margin-bottom: 10px;">
+      <button class="btn btn-info" onclick="switchView('calendar')">Calendar View</button>
+      <button class="btn btn-info" onclick="switchView('table')">Table View</button>
+    </div>
+
+    <!-- Table View -->
+    <div id="table-view" class="table-view">
+      <%= render 'table_view' %>
+    </div>
+
+    <!-- Calendar View -->
+    <div id="calendar-view" style="display: none;">
+      <div id="calendar"></div>
+    </div>
+  </div>
+</body>
+<style>
+  .schedule-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 0px;
+  }
+
+  /* Style for the schedule table */
+  .table-bordered th, .table-bordered td {
+    border: 1px solid #ddd;
+  }
+
+  .table th, .table td {
+    vertical-align: middle;
+  }
+
+  /* Style for the location list */
+  td ul.list-unstyled {
+    padding: 0;
+    margin: 0;
+  }
+
+  td li {
+    border-bottom: 1px solid #eee;
+    padding: 5px 0;
+  }
+
+  td li:last-child {
+    border-bottom: none;
+  }
+
+  /* Style for the calendar container */
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+
+  .table-view {
+    margin-left: -15px;
+    margin-top: -50px;
+  }
+
+  /* Custom style for past events */
+  .past-event-title {
+    background-color: green;
+    color: white;
+    padding: 0px;
+    border-radius: 4px;
+  }
+
+  /* Custom style for removed events */
+  .removed-event-title {
+    background-color: red;
+    color: white;
+    padding: 0px;
+    border-radius: 4px;
+  }
+</style>
+</html>

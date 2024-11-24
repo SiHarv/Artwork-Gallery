@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .art-image {
+      width: 150px;
+      height: 150px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Art Collection</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Type of Art</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% arts.each do |art| %>
+        <tr>
+          <td>
+            <% if art.images.attached? %>
+              <%= image_tag rails_blob_url(art.images.first, only_path: false), class: 'art-image' %>
+            <% else %>
+              No image
+            <% end %>
+          </td>
+          <td><%= art.title %></td>
+          <td><%= art.status %></td>
+          <td><%= art.type_of_art %></td>
+          <td>$<%= number_to_currency(art.price, unit: '') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</body>
+</html>

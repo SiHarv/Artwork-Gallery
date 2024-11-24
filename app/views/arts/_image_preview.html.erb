@@ -1,0 +1,31 @@
+<div class="mb-3 image-preview-parent" data-controller="previews">
+  <%= form.label :images, class: "form-label" %>
+  <div class="image-input">
+    <%= form.file_field :images, multiple: true, direct_upload: true,
+     data: { previews_target: "input", action: "change->previews#preview" }, id: 'image-input' %>
+    <!-- Hidden field to store existing images' IDs -->
+    <%= form.hidden_field :existing_images, value: art.images.map(&:signed_id).join(",") %>
+  </div>
+
+  <!-- image previews -->
+  <div class="image-previews" data-previews-target="preview">
+    <% if art.images.attached? %>
+      <% art.images.each do |image| %>
+        <%= image_tag image, class: "image-preview" %>
+      <% end %>
+    <% else %>
+      <%= image_tag "no_image.jpg", class: "no-image-preview" %>
+    <% end %>
+  </div>
+
+  <!-- Error messages -->
+  <% if @art.errors.any? %>
+    <div class="error-messages">
+      <ul>
+        <% @art.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,60 @@
+<div id="arts" class="row">
+  <% @arts.each do |art| %>
+    <div class="col-md-12 mb-4">
+      <%= link_to art_path(art), class: "card-link" do %>
+        <div class="card h-100">
+          <div class="card-body fixed-height">
+            <div class="list-display-parent">
+              <div class="list-display-render">
+                <%= render art %>
+              </div>
+              <div class="list-display-description">
+                <p class="art-details">
+                  <strong>Description: </strong>
+                  <%= art.body %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  .list-display-parent {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0px;
+  }
+
+  .list-display-description,
+  .list-display-render {
+    flex: 1; /* Allows each child to grow and fill space equally */
+    min-width: 150px; /* Ensures a minimum width for each child */
+    box-sizing: border-box; /* Includes padding and border in element's total width and height */
+  }
+
+  .list-display-description {
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+    margin-right: 15px;
+  }
+
+  .list-display-render {
+    margin-right: -600px;
+  }
+
+  .card-link {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Ensures text color is inherited from parent */
+    display: block; /* Makes the link block-level to fill the container */
+  }
+
+  .card-link:hover,
+  .card-link:hover * {
+    text-decoration: none; /* Removes underline from all child elements on hover */
+  }
+</style>

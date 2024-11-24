@@ -1,0 +1,76 @@
+<%= form_with(model: @schedule, local: true) do |form| %>
+
+  <% if @schedule.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@schedule.errors.count, "error") %> prohibited this schedule from being saved:</h4>
+      <ul>
+        <% @schedule.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="schedule-form-container">
+    <div class="schedule-child-container">
+      <div class="mb-3">
+        <%= form.label :date, class: "form-label" %>
+        <%= form.date_field :date, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :location_id, "Location" %>
+        <%= form.collection_select :location_id, current_user.locations, :id, :formatted_location, { include_blank: 'Select a Location' }, { class: 'form-control' } %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :art_id, "Select Art" %>
+        <%= form.collection_select :art_id, current_user.arts, :id, :title, { include_blank: 'Select Art' }, { class: 'form-control' } %>
+      </div>
+
+      <div class="mb-3 full-width schedule-save-btn">
+        <%= form.submit 'Save', class: 'btn btn-primary' %>
+      </div>
+    </div>
+
+    <div class="schedule-child-container-description">
+      <div class="mb-3">
+        <%= form.label :description, class: "form-label" %>
+        <%= form.text_area :description, class: "form-control description-field" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+<%= render 'devise/shared/navbar' %>
+
+<style>
+  .schedule-form-container {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+  }
+
+  .schedule-child-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .schedule-child-container-description {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .schedule-child-container-description .description-field {
+    height: 300px;
+    width: 740px;
+    resize: none;
+
+  }
+  .schedule-save-btn {
+  }
+
+</style>
+

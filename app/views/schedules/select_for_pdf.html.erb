@@ -1,0 +1,82 @@
+<h1 class="select-arts-title" >Select Schedule for PDF Report</h1>
+
+<%= form_with url: download_pdf_schedules_path(format: :pdf), method: :get, local: true do %>
+  <table class="selected-arts-table">
+    <thead>
+      <tr>
+        <th>Select</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Description</th>
+        <th>Artwork Title</th>
+        <th>Artwork</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @schedules.each do |schedule| %>
+        <tr>
+          <td><%= check_box_tag 'schedule_ids[]', schedule.id %></td>
+          <td><%= schedule.date %></td>
+          <td>
+            <% if schedule.location.present? %>
+              <% name_of_place = schedule.location.name_of_place %>
+              <% address = schedule.location.address %>
+              <% if name_of_place.present? && address.present? %>
+                <%= "#{name_of_place}, #{address}" %>
+              <% elsif name_of_place.present? %>
+                <%= "#{name_of_place}, address deleted" %>
+              <% elsif address.present? %>
+                <%= "name_of_place deleted, #{address}" %>
+              <% else %>
+                <%= "name_of_place and address deleted" %>
+              <% end %>
+            <% else %>
+              <div style="color: red">
+                Location Deleted
+              </div>
+            <% end %>
+          </td>
+          <td><%= schedule.description %></td>
+          <td><%= schedule.art.title %></td>
+          <td><%= image_tag schedule.art.images.first, class: "selected-arts-image" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= submit_tag 'Generate PDF', class: 'btn generate-button' %>
+<% end %>
+<%= render 'devise/shared/navbar' %>
+
+<style>
+
+  .select-arts-title {
+    text-align: center;
+  }
+  /* Basic styles for the table and form */
+  .selected-arts-table {
+    border-collapse: collapse;
+    width: 600px; /* Set a desired table width (adjust as needed) */
+    margin: 0 auto; /* Center the table horizontally */
+  }
+  th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 500px;
+  }
+  /* Style the submit button (replace with your button styles) */
+  .generate-button {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-left: 1120px;
+  }
+
+  .selected-arts-image {
+    width: 100px;
+    height: 100px;
+  }
+</style>

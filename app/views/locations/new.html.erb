@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Location</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <%= render 'devise/shared/navbar' %>
+  <div class="container mt-4">
+    <h1>New Location</h1>
+
+    <%= render 'form', location: @location %>
+  </div>
+</body>
+</html>
+
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+
+</style>

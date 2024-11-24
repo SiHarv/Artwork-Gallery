@@ -1,0 +1,41 @@
+<div class="mb-3 video-preview-parent" data-controller="previews">
+  <div class="video-preview-child">
+    <%= form.label :video, 'Upload a Video', class: "form-label" %>
+    <div class="video-input">
+      <%= form.file_field :video, accept: 'video/mp4,video/mpeg,video/quicktime',
+          direct_upload: true,
+          data: { previews_target: "input", action: "change->previews#preview" } %>
+    </div>
+
+    <!-- Video preview -->
+    <div data-previews-target="preview" class="video-preview-container">
+      <% if @art.video.attached? %>
+        <video controls class="video-preview">
+          <source src="<%= url_for(@art.video) %>" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      <% else %>
+        <div class="no-video-preview">
+          <p>Attach Video File to Preview</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .no-video-preview {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: oswald;
+    font-weight: 420;
+    background-color: #F7F7F7;
+  }
+
+</style>

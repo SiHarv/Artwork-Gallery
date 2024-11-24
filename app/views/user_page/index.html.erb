@@ -1,0 +1,33 @@
+<!-- app/views/user_page/index.html.erb -->
+<div class="center-container">
+  <div class="image-container">
+    <%= image_tag 'under-construction.png', alt: 'Description of the image', class: 'your-css-class' %>
+  </div>
+  <div class="text-container">
+    <h1>Page Under Construction!</h1>
+    <h4>We're working hard to bring you something amazing. Please check back soon!</h4>
+  </div>
+</div>
+
+
+<style>
+  /* app/assets/stylesheets/application.css or your custom stylesheet */
+
+  .center-container {
+    display: flex;
+    flex-direction: column; /* Align children in a column */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    min-height: 100vh; /* Ensure full viewport height */
+    text-align: center; /* Center text inside */
+  }
+
+  .image-container {
+    margin-bottom: 20px; /* Space between image and heading */
+  }
+
+  .your-css-class {
+    max-width: 100%; /* Ensure image is responsive */
+    height: auto; /* Maintain aspect ratio */
+  }
+</style>

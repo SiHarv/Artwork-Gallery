@@ -1,0 +1,987 @@
+// Custom styles
+@import "bootstrap";
+// Import Bootstrap Icons
+
+
+/*
+ *= require bootstrap
+ *= require_self
+ *= require_tree .
+*/
+
+// page/home ============================================================================
+.home-page {
+  background-color: #f9f7e9; /* Light cream color */
+  color: #3d3d3d; /* Dark gray for text */
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.page-title {
+  color: #104142;
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.page-info {
+  color: #a9a9a9; /* Light gray for subtext */
+  margin-bottom: 20px;
+}
+
+.current-user-info {
+  background-color: #ffffff; /* White background for user info box */
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.user-greeting, .user-role, .login-prompt {
+  margin-bottom: 10px;
+}
+
+.auth-links .btn {
+  background-color: #104142;
+  color: #ffffff; /* White text */
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+
+.btn {
+  display: inline-block;
+  text-align: center;
+}
+
+.go-arts-btn, .sign-out-btn, .sign-up-btn, .login-btn {
+  background-color: #104142;
+  color: #ffffff; /* White text */
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.go-arts-btn:hover, .sign-out-btn:hover, .sign-up-btn:hover, .login-btn:hover {
+  background-color: #0197B2; /* Actions color on hover */
+}
+
+
+// sign up  ==============================================================================
+/* General styles */
+.signup-body {
+  background-color: #F5F5E7; /* Light background color */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height of the viewport */
+}
+
+h2 {
+  color: #104142; /* Dark green color for headings */
+}
+
+p {
+  color: #333; /* Dark color for paragraphs */
+}
+
+/* Centering wrapper */
+.center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Sign-Up Form Styles */
+.signup-form {
+  background-color: #ffffff; /* White background */
+  padding: 40px; /* More padding for better spacing */
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center-align text */
+}
+
+.signup-form h2 {
+  color: #104142;
+  margin-bottom: 20px;
+}
+
+.signup-form .field {
+  margin-bottom: 15px;
+}
+
+.signup-form .field label {
+  display: block;
+  color: #333;
+  margin-bottom: 5px;
+  text-align: left; /* Left-align labels */
+}
+
+.signup-form .field input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.signup-form .actions {
+  text-align: center;
+}
+
+.signup-form .actions .btn {
+  background-color: #104142;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.signup-form .actions .btn:hover {
+  background-color: #0197B2;
+}
+
+.signup-form .links a {
+  color: #104142;
+  text-decoration: none;
+  display: block;
+  margin-top: 10px;
+}
+
+.signup-form .links a:hover {
+  text-decoration: underline;
+}
+
+// sign in  ==============================================================================
+.signin-body {
+  background-color: #F5F5E7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.signin-form {
+  background-color: #FFFFFF;
+  padding: 3em;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 400px; /* Increased width */
+}
+
+h2 {
+  color: #104142;
+}
+
+.field {
+  margin-bottom: 1.5em;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.5em;
+  color: #104142;
+}
+
+.field input {
+  width: 100%;
+  padding: 0.75em; /* Increased padding */
+  border: 1px solid #0197B2;
+  border-radius: 5px;
+}
+
+.remember-me {
+  margin-bottom: 1.5em;
+  text-align: left;
+}
+
+.remember-me-checkbox {
+  margin-right: 0.5em;
+}
+
+.remember-me-label {
+  color: #104142;
+}
+
+.actions {
+  margin-bottom: 1.5em;
+}
+
+.btn {
+  color: #FFFFFF;
+  padding: 0.75em 1.5em; /* Increased padding */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em; /* Increased font size */
+}
+
+
+.links a {
+  color: #0197B2;
+  text-decoration: none;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+
+// application.html.erb ================================================================
+
+.webpage-style {
+  background-color: #F5F5E7;
+}
+
+
+// index.html.erb =======================================================================
+.index-container {
+  display: flex;
+  flex-direction: column; /* or row */
+  gap: 15px;
+  padding-bottom: 50px;
+  margin-top: -30px;
+
+}
+
+.form-horizontal .control-label {
+  font-weight: bold;
+}
+
+.index-title {
+  padding-left: 190px;
+  padding-top: 5px;
+}
+
+//Sorting Tools ==================
+.sorting-tools {
+  display: flex;
+  justify-content: space-evenly; /* Adjust spacing as needed */
+  align-items: center; /* Vertically center items */
+  padding-top: 20px;
+  padding-left: 100px;
+  gap: 500px;
+}
+.filter-and-sort-container {
+  margin-left: -60px;
+
+}
+.type-of-art-container,
+.sort-view-container,
+.view-type-container {
+  margin-left: 00px;
+}
+
+.type-of-art-container {
+
+
+}
+.view-type-container {
+  margin-left: 5px;
+  margin-top: 15px;
+}
+
+.sort-view-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 15px;
+  margin-top: -10px;
+}
+
+.sort-dropdown {
+  margin-left: 0px;
+
+}
+
+
+// Sorting Drip Down =====================================
+.custom-dropdown {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc; /* Adjust border color as needed */
+  border-radius: 5px;
+  background-color: #fff; /* Adjust background color as needed */
+}
+
+.custom-dropdown select {
+  flex: 1;
+  appearance: none; /* Remove default select styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  background-color: transparent;
+  color: #333; /* Adjust text color as needed */
+}
+
+.custom-dropdown::after {
+  content: '\25BC'; /* Unicode for downward arrow */
+  margin-left: 5px;
+  color: #333; /* Adjust arrow color as needed */
+}
+
+.custom-dropdown .btn {
+  background-color: #007bff; /* Adjust button color as needed */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+//tools-button ===================================== NEEEEEEED STYYYYYYYYYLEEEEEE =======================
+.tools-btn {
+
+}
+
+.search-report-and-new {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 115px;
+}
+// Search Button
+.search-bar-container {
+  display: flex; /* Use flexbox to align items */
+  justify-content: space-between; /* Space items horizontally */
+  align-items: center; /* Center items vertically */
+  gap: 10px;
+}
+
+
+
+
+
+// New and Share ========================
+.new-and-share {
+  display: flex;
+  gap: 10px;
+}
+
+.new-art {
+  background-color: #6FB098;
+}
+
+.share-dropdown {
+  position: relative;
+  top: 0px;
+  right: 50px;
+
+}
+
+
+// View arts ======================
+
+.index-view-parent {
+  margin-left: 160px;
+  margin-right: -160px;
+  margin-top: -15px;
+
+}
+.index-view-child {
+  margin-left: -390px;
+}
+
+.box {
+  padding-top: 40px;
+}
+
+
+.card {
+  position: relative;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  transition: transform 0.3s ease; /* Adding a transition for smooth animation */
+}
+
+.card:hover {
+  transform: scale(1.03); /* Increase size on hover */
+}
+
+
+.btn-primary {
+  background-color: #0197B2;
+  border-color: #0197B2;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+.show-this-art {
+  margin-left: 206px;
+  margin-bottom: 10px;
+}
+
+.fixed-height {
+  height: 350px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fixed-height .btn {
+  position: absolute;
+  bottom: 10px;
+}
+
+
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 18px;
+
+}
+
+// devise/shared/_navbar ====================================================================================================
+/* Navigation Bar Styles */
+nav {
+  background-color: #104142;
+  height: 100vh;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0; /* Sidebar is visible by default */
+  overflow-x: hidden;
+  transition: left 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+
+nav ul li {
+  width: 100%;
+}
+
+nav ul li a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: white;
+  width: 100%;
+  text-align: left;
+  padding-left: 20px;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  background-color: #0197B2;
+}
+
+.nav-body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  transition: margin-left 0.3s;
+  padding-left: 0; /* Adjusted to prevent content from being hidden behind the sidebar */
+}
+
+.content {
+  padding: 10px;
+  margin-left: 250px; /* Shift content to the right to accommodate the fixed sidebar */
+  transition: margin-left 0.3s;
+}
+
+
+
+
+// _art.html.erb ==========================================================================
+
+.fixed-size-image-container {
+  display: flex;
+  justify-content: left;
+  padding-left: 26px;
+
+}
+.fixed-size-image {
+  width: 250px;  /* Adjust the width as needed */
+  height: 220px; /* Adjust the height as needed */
+  object-fit: cover; /* Ensures the image covers the box without distortion */
+  margin-top: 10px;
+  border-radius: 20px;
+}
+
+.fixed-size-video {
+  width: 450px;  /* Adjust the width as needed */
+  height: 250px; /* Adjust the height as needed */
+  object-fit: cover; /* Ensures the image covers the box without distortion */
+  margin-left: 0px;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+
+.image-details {
+  margin-left: 16px;
+  margin-top: 0px;
+}
+
+
+
+.new-label {
+  margin-left: -60px;
+}
+
+._art-title {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+._art-body {
+  margin-left: 10px;
+}
+
+._art-price {
+  margin-left: 26px;
+}
+
+.art-details {
+  margin-left: 10px;
+  margin-bottom: 0.1px;
+}
+
+
+
+// _list_view.html.erb and _tile_view.html.erb =================================================
+.art-list-item {
+  border-bottom: 1px solid #eaead5;
+  padding: 0px 0;
+}
+
+.art-tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.art-tile-item {
+  flex: 1 1 calc(33.333% - 20px);
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #eaead5;
+  margin-bottom: 20px;
+
+}
+
+
+// new.html.erb ================================================================================
+.new-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f5f5e7;
+}
+
+.new-art-title {
+  text-align: center;
+  font-size: 24px;
+  color: #0D0E02;
+}
+
+.nav-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.new-art-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-left: -250px;
+
+}
+
+.new-render-form {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding-bottom: -100px;
+}
+
+.new-back-button {
+  padding: 10px;
+  background-color: #104142;
+  border: 1px solid #F5F5E7;
+  color: #FFFFFF; /* Ensure the text is visible */
+}
+
+
+
+
+
+
+// _form.html.erb styles ========================================================================
+._form-input-container {
+  margin-top: -25px;
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+  height: 73vh;
+  padding-bottom: 10px;
+  gap: 200px;
+
+}
+
+._form-container .form-group input[type="text"],
+._form-container .form-group input[type="number"],
+._form-container .form-group textarea,
+._form-container .form-group select {
+  width: 200px; /* Example style */
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  color: rgb(3, 3, 3); /* Text color */
+  margin-bottom: 0px; /* Example margin */
+}
+
+.form-group {
+  margin-top: 10px;
+  width: 1vh;
+  padding: 20px;
+}
+
+.title-input {
+  height: 30px;
+}
+
+
+.form-control {
+  width: 200px;
+  height: 40px;
+}
+
+.dimension-container {
+  border: 1px solid #eaead5;
+  padding: 10px;
+
+}
+
+/* Option styling via JavaScript */
+.option-available {
+  color: green;
+}
+
+.option-sold {
+  color: red;
+}
+
+.option-reserved {
+  color: gray; /* Optional: color for other options */
+}
+
+// button styles =================
+
+.form-buttons {
+  margin-top: -13px;
+}
+.btn-save-container {
+
+}
+.button-save {
+  text-align: center;
+  margin-top: 20px;
+  background-color: #73AE98;
+  padding: 10px 20px; /* Adjust padding as needed */
+  width: 100px; /* Adjust the width as needed */
+}
+
+.btn-cancel-container {
+
+}
+
+.button-cancel {
+  margin-top: 5px;
+  text-align: center;
+  width: 100px;
+  padding: 10px 20px;
+}
+
+
+// input media =================
+
+.media-and-description-parent {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.video-and-image-parent {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+// images =================
+.no-image-preview {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.image-preview {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+}
+
+.image-preview-parent {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-previews {
+  display: grid;
+  grid-template-columns: repeat(2, 140px); /* 2 columns of 100px width each */
+  grid-template-rows: repeat(2, 140px); /* 2 rows of 100px height each */
+  gap: 0px; /* Optional: space between images */
+  margin-top: 0px;
+}
+
+.error-messages {
+  color: red;
+  margin-top: 10px;
+}
+
+.media-and-description-parent {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 20px;
+}
+
+// video =================
+.video-preview {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+}
+
+// show.html.erb ==================================================================================
+/* General Styles */
+.show-body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+
+}
+
+.show-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  height: 50vh;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Content Box Styles */
+.content-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f7f7f7;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 130%;
+  margin-left: -100px;
+  gap: 20px;
+}
+
+
+.show-price {
+  margin: 20px 0;
+}
+
+
+.show-image-previews {
+  display: grid;
+  grid-template-columns: repeat(2, 150px); /* 2 columns of 100px width each */
+  grid-template-rows: repeat(2, 140px); /* 2 rows of 100px height each */
+  gap: 2px; /* Optional: space between images */
+  margin-top: 0px;
+  border-radius: 10px;
+}
+
+.show-image-preview {
+  width: 150px;
+  height: 140px;
+  object-fit: cover;
+  padding: 0px;
+
+}
+
+.show-fixed-size-video {
+  width: 580px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+// Upper details =========================================
+.show-art-details-upper {
+  display: flex;
+  justify-content: space-between; /* Space out child containers */
+  align-items: center; /* Center child containers vertically */
+}
+
+.show-art-details {
+  margin-bottom: 0px;
+  width: 322px; /* Example width */
+  height: 383px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+
+}
+
+.show-image-render {
+
+
+}
+.show-art-description {
+  margin-bottom: 0px;
+  height: 383px;
+  width: 603px; /* Example width */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+
+
+.show-action-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+// Lower details =========================================
+.show-art-details-lower {
+  display: flex;
+  /* Optional: Add more flex properties as needed */
+  justify-content: space-between; /* Space out child containers */
+  align-items: center; /* Center child containers vertically */
+  gap: 18px;
+}
+
+
+.show-art-pictures {
+  margin-left: 0px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+
+}
+
+.show-art-video {
+  height: 30.6vh;
+  width: 118vh; /* Example width */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+
+
+
+
+
+// edit.html.erb ==================================================================================
+.edit-container {
+  padding-top: 0px;
+
+}
+
+
+
+
+
+// Responsive Design ===========================================================================================================
+@media (max-width: 200px) {
+  .main {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+  }
+
+  .form-control {
+    width: 100%; /* Full width on smaller screens */
+  }
+
+  .fixed-size-image {
+    width: 100%; /* Full width image on smaller screens */
+    height: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .back-to-arts {
+    margin-top: -50px; /* Adjust margin for smaller screens */
+  }
+
+  .main {
+    padding-bottom: 10%; /* Decrease padding on smaller screens */
+  }
+
+  .box {
+    padding-top: 20px; /* Adjust padding for smaller screens */
+  }
+
+  .dimension-container {
+    padding: 5px; /* Smaller padding for dimension container */
+  }
+}
+
+
+
+

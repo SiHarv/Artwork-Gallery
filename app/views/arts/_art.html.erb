@@ -1,0 +1,50 @@
+<div id="<%= dom_id art %>">
+
+
+
+  <% if art.images.attached? %>
+    <div class="fixed-size-image-container">
+      <p>
+        <%= image_tag art.images.first, class: "fixed-size-image" %>
+      </p>
+    </div>
+  <% end %>
+
+  <div class="image-details">
+
+    <!-- title -->
+    <p class="art-details">
+      <strong>Title: </strong>
+      <strong><%= art.title %></strong>
+    </p>
+
+    <!-- Date -->
+    <p class="art-details">
+      <strong>Date: </strong>
+      <%= art.created_at.strftime("%B %d, %Y") %>
+    </p>
+
+    <!-- status -->
+    <p class="art-details">
+      <strong>Status: </strong>
+      <span class="<%= art.status == 'Available' ? 'text-success' : (art.status == 'Sold' ? 'text-danger text-strikethrough' : 'text-muted') %>">
+        <%= art.status %>
+      </span>
+    </p>
+
+
+    <!-- type -->
+    <p class="art-details">
+      <strong>Type: </strong>
+      <%= art.type_of_art %>
+    </p>
+
+  </div>
+</div>
+
+
+<style>
+  .text-strikethrough {
+    text-decoration: line-through;
+  }
+</style>

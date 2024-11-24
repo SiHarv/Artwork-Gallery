@@ -1,0 +1,90 @@
+<%= form_with(model: art, remote: true, class: "my-5") do |form| %>
+
+  <% if art.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(art.errors.count, "error") %> prohibited this art from being saved:</h2>
+
+      <ul>
+        <% art.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- title -->
+  <div class="_form-input-container">
+    <div class="form-group">
+      <div class="">
+        <%= form.label :title, class: "form-label" %>
+        <%= form.text_field :title, class: "title-input form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :price, class: "form-label" %>
+        <%= form.number_field :price, class: "form-control", min: 0 %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :medium, class: "form-label" %>
+        <%= form.select :medium, options_for_select([
+          'Oil Paint', 'Acrylic Paint', 'Watercolor', 'Gouache',
+          'Pencil', 'Charcoal', 'Ink', 'Pastel'
+        ]), {}, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :status, class: "form-label" %>
+        <%= form.select :status, options_for_select([
+          ['Available', 'Available'],
+          ['Sold', 'Sold'],
+          ['Reserved', 'Reserved']
+        ]), {}, class: "form-control", id: 'status-select' %>
+      </div>
+
+
+      <div class="mb-3">
+        <%= form.label :type, class: "form-label" %>
+        <%= form.select :type_of_art, options_for_select([
+          'Painting', 'Drawing', 'Ink', 'Pastel', 'Mixed Media',
+          'Digital Art', 'Digital Painting','Print Making', 'Digital Drawing'
+        ]), {}, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :dimension, class: "form-label" %>
+        <%= form.select :dimension, options_for_select([
+          'Mini (4"x6", 5"x7")', 'Small (8"x10", 9"x12")', 'Medium (11"x14", 12"x16", 16"x20")',
+          'Large (18"x24", 20"x24", 24"x30")', 'Extra Large (24"x36", 30"x40", 36"x48)',
+          'Square (8"x8", 12"x12", 16"x16", 20"x20)', 'Panoramic (10"x20", 12"x24", 20"x40)'
+        ]), {}, class: "form-control" %>
+      </div>
+
+      <div class="mb-3 form-buttons">
+        <div class="btn-save-container">
+          <%= form.submit "Save", class: "btn button-save" %>
+        </div>
+        <div class="btn-cancel-container">
+          <%=  link_to "Cancel", @art, class: "btn btn-info button-cancel" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- image and video ======================================== -->
+    <div class="media-and-description-parent">
+      <div class="mb-3">
+        <%= form.label :body, "Description", class: "form-label" %>
+        <%= form.text_area :body, class: "form-control", style: "width: 600px; height: 300px; resize: none;" %>
+      </div>
+      <div class="video-and-image-parent">
+        <div class="image-media">
+          <%= render "image_preview", form: form, art: art %>
+        </div>
+        <div class="video-media">
+          <%= render "video_preview", form: form, art: art %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+

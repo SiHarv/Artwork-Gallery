@@ -1,0 +1,69 @@
+<!-- app/views/public_arts/show.html.erb -->
+<div class="show-container">
+  <h1 class="title">Details</h1>
+  <div class="show-body">
+    <div class="content-box">
+      <div class="show-art-details-upper">
+        <div class="show-art-details">
+          <div class="show-image-render">
+            <%= render @art %>
+          </div>
+          <p class="_art-price">
+            <strong>Price:</strong>
+            <%= number_to_currency(@art.price) if @art.price %>
+          </p>
+        </div>
+        <div class="show-art-description">
+          <p class="art-details">
+            <strong>Description: </strong>
+            <%= @art.body %>
+          </p>
+        </div>
+      </div>
+      <div class="show-art-details-lower">
+        <div class="show-art-pictures">
+          <div class="show-image-previews">
+            <% if @art.images.attached? %>
+              <% @art.images.each do |image| %>
+                <%= image_tag image, class: "show-image-preview" %>
+              <% end %>
+            <% else %>
+              <%= image_tag "no_image.jpg", class: "no-image-preview" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="show-art-video">
+          <div class="show-video-preview">
+            <% if @art.video.attached? %>
+              <%= video_tag url_for(@art.video), controls: true, class: 'video-js vjs-default-skin show-fixed-size-video' %>
+            <% else %>
+              <div class="show-no-video">
+                <p>No Video Attached</p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="show-button-container">
+        <%= link_to user_page_index_path, class: "btn new-art" do %>
+          <i class="fas fa-plus"></i>
+          Buy
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* app/assets/stylesheets/application.css or your custom stylesheet */
+  .show-button-container {
+    display: flex;
+    justify-content: flex-end; /* Aligns content to the right */
+    margin-top: 20px; /* Optional: adds space above the button */
+  }
+
+  .btn.new-art {
+    /* Your button styles here */
+  }
+
+</style>

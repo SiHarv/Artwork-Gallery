@@ -1,0 +1,163 @@
+<div class="container mt-5 index-container">
+  <p class="text-success"><%= notice %></p>
+
+  <div class="text-center mb-4 index-title">
+    <h1 style="color: #F5F5E7">...</h1>
+  </div>
+
+
+  <div class="sorting-tools">
+
+    <div class="filter-and-sort-container">
+      <!-- Filter Drop down-->
+      <div class="type-of-art-container">
+        <%= render 'type_filter_form' %> <!-- Include the form for filtering -->
+      </div>
+
+      <div class="row justify-content-center mb-4 sort-view-container">
+        <!-- sort by: -->
+        <div class="sort-dropdown">
+          <p class="mb-0 sort-title"></p>
+          <div class="sort-list">
+            <%= form_with(url: arts_path, method: "get", id: "sort-form", class: "d-flex mt-2") do %>
+              <%= select_tag :sort_by, options_for_select({
+                  "Title (A-Z)" => "title_asc",
+                  "Title (Z-A)" => "title_desc",
+                  "Date (Recent)" => "created_at_desc",
+                  "Date (Old)" => "created_at_asc",
+                  "Price (High)" => "price_desc",
+                  "Price (Low)" => "price_asc",
+              }, params[:sort_by]), onchange: "this.form.submit();", class: "form-select me-2 custom-dropdown form-control" %>
+            <% end %>
+            <% @view_type = params[:view_type] || 'tile' %>
+          </div>
+        </div>
+
+        <!-- View Type-->
+        <div class="view-type-container">
+          <button class="tools-btn btn-primary dropdown-toggle" type="button" id="view-tools" data-bs-toggle="dropdown" aria-expanded="false">View Type
+            <span class="me-2"><i class="fa-solid fa-caret-down"></i></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="view-tools">
+            <li style="text-align: center;">
+              <%= link_to arts_path(view_type: 'list'), class: 'dropdown-item d-flex align-items-center justify-content-center' do %>
+                <i class="fas fa-list me-2"></i> <!-- Font Awesome icon for List View -->
+                List
+              <% end %>
+            </li>
+            <li style="text-align: center;">
+              <%= link_to arts_path(view_type: 'tile'), class: 'dropdown-item d-flex align-items-center justify-content-center' do %>
+                <i class="fas fa-th-large me-2"></i> <!-- Font Awesome icon for Tile View -->
+                Tiles
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Search Bar, Report, and New Art -->
+    <div class="search-report-and-new">
+
+      <!-- Search Bar-->
+      <div class="search-text-field">
+        <%= form_tag(arts_path, method: :get, id: "search-form", class: "d-flex") do %>
+          <div class="search-parent-container">
+            <div class="search-bar">
+              <%= text_field_tag :query, params[:query], placeholder: "Search by title", class: "form-control" %>
+            </div>
+            <div class="search-button">
+              <%= submit_tag "Search", class: "tools-btn btn-primary" %>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+
+
+      <div class="new-and-share">
+        <div>
+          <% if current_user %>
+            <a href="#" id="copyLinkButton" class="btn link-share-arts">
+              <i class="fa-solid fa-share"></i> Share
+            </a>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to new_art_path, class: "btn new-art" do %>
+            <i class="fas fa-plus"></i> <!-- Icon for New art -->
+            New Art
+          <% end %>
+        </div>
+        <div>
+          <%= link_to select_for_pdf_arts_path, class: "btn report btn-secondary" do %>
+            <i class="fas fa-file-alt"></i> <!-- Icon for Report -->
+            Report
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'devise/shared/navbar' %>
+
+  <!-- View Arts -->
+  <div class="index-view-parent">
+    <div class="index-view-child">
+      <% if @view_type == 'tile' %>
+        <%= render partial: 'tile_view' %>
+      <% else %>
+        <%= render partial: 'list_view' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Style for the search text field container */
+  .search-parent-container {
+    display: flex; /* Use flexbox to align items horizontally */
+    justify-content: center; /* Align items to the start of the container */
+    margin-bottom: 15px; /* Adjust bottom margin if needed */
+    gap: 8px;
+  }
+
+  /* Style for the search bar */
+  .search-bar {
+  }
+
+  /* Style for the search button */
+  .search-button {
+    flex-shrink: 0; /* Prevent the button from shrinking */
+    padding-top: 5px;
+  }
+
+  .link-share-arts {
+    background-color: #007bff;
+
+  }
+
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const link = document.getElementById('copyLinkButton');
+    const baseUrl = 'http://localhost:3000/';
+    const path = '<%= public_arts_path(current_user.id) %>';
+    const url = baseUrl + path;
+
+    link.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent the link from navigating
+
+      navigator.clipboard.writeText(url)
+        .then(() => {
+          alert('Link copied to clipboard!');
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+    });
+  });
+</script>
+

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Schedule Details</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+
+  <main class="schedule-details-page">
+    <div class="schedule-details-container">
+      <section class="schedule-info">
+        <h2>Schedule Details</h2>
+        <div class="schedule-details-content">
+          <p><strong>Date:</strong> <%= @schedule.date %></p>
+          <p><strong>Address:</strong>
+            <% if @schedule.location.present? %>
+              <% name_of_place = @schedule.location.name_of_place %>
+              <% address = @schedule.location.address %>
+              <span class="address-details">
+                <% if name_of_place.present? && address.present? %>
+                  <%= "#{name_of_place}, #{address}" %>
+                <% elsif name_of_place.present? %>
+                  <%= "#{name_of_place}, address deleted" %>
+                <% elsif address.present? %>
+                  <%= "name_of_place deleted, #{address}" %>
+                <% else %>
+                  <%= "Location not available" %>
+                <% end %>
+              </span>
+            <% else %>
+              <span class="address-removed">
+                Location Removed
+              </span>
+            <% end %>
+          </p>
+          <p><strong>Description:</strong> <%= @schedule.description %></p>
+          <p><strong>Artwork Title:</strong> <%= @schedule.art.title %></p>
+        </div>
+      </section>
+      <div class="schedule-image-button-container">
+        <div >
+          <% if @schedule.art.images.attached? %>
+            <%= image_tag @schedule.art.images.first, class: "schedule-image" %>
+          <% else %>
+            <p>No image available</p>
+          <% end %>
+        </div>
+        <div class="schedule-buttons">
+          <%= link_to 'Edit', edit_schedule_path(@schedule), class: 'btn btn-warning' %>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <%= render 'devise/shared/navbar' %>
+</body>
+</html>
+
+
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+
+  .schedule-details-page {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 60px); /* Adjust for navbar height */
+    padding: 20px;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+  }
+
+  .schedule-details-container {
+    display: flex;
+    flex-direction: row;
+    width: 800px%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px; /* Increase padding for better spacing */
+    gap: 10px;
+  }
+
+  .schedule-image-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .schedule-info {
+    margin-bottom: 20px; /* Add spacing between sections */
+  }
+
+  .schedule-details-content {
+    margin-bottom: 20px;
+  }
+
+  .schedule-info h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+
+  .schedule-details-content p {
+    margin-bottom: 10px; /* Increase spacing between lines */
+    font-weight: bold;
+  }
+
+  .address-details,
+  .address-removed {
+    display: inline-block;
+    font-style: italic;
+    color: #666;
+  }
+
+  .address-removed {
+    color: red;
+  }
+
+  .schedule-image {
+    width: 550px;  /* Adjust the width as needed */
+    height: 520px; /* Adjust the height as needed */
+    object-fit: cover; /* Ensures the image covers the box without distortion */
+    margin-top: 10px;
+    border-radius: 20px;
+    }
+
+  .schedule-buttons {
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+
+
+</style>

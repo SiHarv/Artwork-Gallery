@@ -1,0 +1,65 @@
+<h1 class="select-arts-title" >Select Arts for PDF Report</h1>
+
+<%= form_with url: download_pdf_arts_path(format: :pdf), method: :get, local: true do %>
+  <table class="selected-arts-table">
+    <thead>
+      <tr>
+        <th>Select</th>
+        <th>Art Image</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @arts.each do |art| %>
+        <tr>
+          <td><%= check_box_tag 'art_ids[]', art.id %></td>
+          <td>
+            <% if art.images.attached? %>
+              <p>
+                <%= image_tag art.images.first, class: "selected-arts-image" %>
+              </p>
+            <% end %>
+          </td>
+          <td><%= label_tag "art_ids_#{art.id}", art.title %></td>
+          <td><%= art.status %></td>
+          <td>$<%= number_to_currency(art.price, unit: '') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= submit_tag 'Generate PDF', class: 'btn generate-button' %>
+<% end %>
+
+<style>
+
+  .select-arts-title {
+    text-align: center;
+  }
+  /* Basic styles for the table and form */
+  .selected-arts-table {
+    border-collapse: collapse;
+    width: 600px; /* Set a desired table width (adjust as needed) */
+    margin: 0 auto; /* Center the table horizontally */
+  }
+  th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  /* Style the submit button (replace with your button styles) */
+  .generate-button {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-left: 1120px;
+  }
+
+  .selected-arts-image {
+    width: 100px;
+  }
+</style>

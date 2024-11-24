@@ -1,0 +1,28 @@
+<%= form_with url: arts_path, method: :get, local: true do %>
+  <div class="type-filter">
+    <%= label_tag :type_of_art, "" %>
+    <%= select_tag :type_of_art, options_for_select([
+      'All', 'Painting', 'Drawing', 'Ink', 'Pastel',
+      'Mixed Media','Digital Art', 'Digital Painting',
+      'Print Making','Digital Drawing'
+    ].map { |type| [type, type] }), include_blank: true, class: "form-control" %>
+    <%= submit_tag 'Filter Type', class: "tools-btn btn-primary" %>
+  </div>
+<% end %>
+
+<style>
+  .type-filter {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically center elements */
+    margin-bottom: 1rem;
+    gap: 5px;
+  }
+
+  .type-filter .form-control {
+    flex: 1; /* Allow the select dropdown to grow and take remaining space */
+  }
+
+  .type-filter {
+    margin-left: 1rem; /* Add spacing between dropdown and button */
+  }
+</style>
